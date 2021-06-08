@@ -1,0 +1,98 @@
+<html> 
+ <head>
+  <meta charset="UTF-8">
+  <title>Break Neck Pizza Delivery</title>     
+  <style>
+	body {
+	  color: darkred;
+	  font-family: sans-serif;
+	  margin: 2em;
+	  padding: 1em;
+	  border: double darkred;
+	}
+	
+	.customer-info {
+	  font-weight: bold;
+	}
+	
+	.customer-data {
+	  color: black;
+	}  
+	div#d_result {
+		width: 300px;
+		height: 100px;
+		border: 1px solid red;
+	}
+  </style>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript">
+    'use strict'
+	let user_tel = '';
+	function getCustomerInfo(){
+		user_tel = $("#mem_tel").val();
+		//사용자가 입력한 값 초기화
+		$("#mem_tel").val("");
+		alert("사용자가 입력한 전번:"+user_tel);
+		//입력 콤포넌트에 포커스 
+		$("#mem_tel").focus();
+    	$.ajax({
+		  url: 'customer.json'
+		 ,dataType: 'json'
+		 ,success:function(data){
+			 //alert("data:"+data);
+			 let result = JSON.stringify(data);
+			 let jsonDoc = JSON.parse(result);
+			 //$("#d_result").text(jsonDoc[0].mem_tel+", "+jsonDoc[2].mem_tel);
+			 $("#d_result").text(result+", "+jsonDoc);
+			 let imsi='';
+			 if(jsonDoc.length > 0){
+				 for(let i=0;i<jsonDoc.length;i++){
+					 if(user_tel === jsonDoc[i].mem_tel){//전번이 같은거야?
+						 imsi+=jsonDoc[i].mem_addr;
+					 }
+				 }//////////////end of for
+			 }//////////////////end of if
+			 //배송지 주소 자동 입력
+			 $("#mem_addr").text(imsi);
+		 }
+		 ,statusCode: {
+		    404: function() {
+		      alert( "page not found" );
+		    }
+		  }
+		});
+	}////////////////getCustomerInfo/////////////
+	function orderPizza(){
+			
+	}
+  </script>
+ </head>
+ <body>
+ 	<div id="d_result"></div>
+ 	<input type="hidden" id="mem_name" name="mem_name" value="홍길동">
+  <p><img src="breakneck-logo.gif" alt="Break Neck Pizza" /></p>
+   <p>Enter your phone number:
+    <input type="text" size="14" id="mem_tel" name="mem_tel" onChange="getCustomerInfo()"/>
+   </p>
+   <p>Type your order in here:</p>
+   <p><textarea name="paper" id="paper" rows="6" cols="50"></textarea></p>
+   <p>Your order will be delivered to:</p>
+   <!-- 
+   JSON포맷의 이름과 태그의 name속성과 id속성을 같은 값으로 통일함.
+   name속성은 jsp에서 사용자가 입력한 값을 읽을 때 사용함.
+   id속성은 javascript에서 사용자가 입력한 값을 읽을 때 사용함.
+   name과 id속성은 같은 값을 사용함.
+   오라클 서버에 테이블 컬럼명과 VO패턴의 멤버변수 이름, Map의 key는 모두 통일해서 사용함.
+    -->
+   <p><textarea name="mem_addr" id="mem_addr" rows="4" cols="50"></textarea></p>
+   <p><input type="button" id="btn_order" value="Order Pizza" onclick="orderPizza()"/></p>
+  <div id="d_msg"></div>
+ </body>
+</html>
+
+
+
+
+
+
+
