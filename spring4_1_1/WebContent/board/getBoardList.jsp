@@ -32,6 +32,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 		    $('#dg_board').datagrid({
+		    	url:'./jsonGetBoardList.sp4',
 		        toolbar:'#tb_board2'
 		    });   		
 		});
