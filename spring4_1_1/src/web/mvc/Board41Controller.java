@@ -46,8 +46,8 @@ public class Board41Controller extends MultiActionController {
 		Map<String,Object> target = new HashMap<>();
 		hmb.bind(target);
 		List<Map<String,Object>> boardList = null;
-		boardList=boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
-		logger.info("boardList:"+boardList);//
+		boardList = boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
+		logger.info("boardList: "+boardList);//
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("board/getBoardList");
 		mav.addObject("boardList", boardList);
@@ -55,10 +55,28 @@ public class Board41Controller extends MultiActionController {
 		//view.forward(req, res);
 		return mav;
 	}
+	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res) 
+			throws Exception
+	{
+		logger.info("getBoardDetail 호출 성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String,Object> target = new HashMap<>();
+		hmb.bind(target);//bm_no값 담음
+		logger.info("target : " + target.get("bm_no"));//
+		List<Map<String,Object>> boardDetail = null;
+		boardDetail = boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
+		logger.info("boardDetail : " + boardDetail);//
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/read");
+		mav.addObject("boardDetail", boardDetail);
+		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		//view.forward(req, res);
+		return mav;
+	}
 	//json으로 내보내준다. - @RestController:String, @Controller:void, ModelAndView, String
 	//@RestController
 	public void jsonGetBoardList(HttpServletRequest req, HttpServletResponse res)
-	throws Exception 
+	throws Exception
 	{
 		logger.info("jsonGetBoardList 호출 성공");
 		List<Map<String,Object>> boardList = null;
@@ -80,10 +98,27 @@ public class Board41Controller extends MultiActionController {
 		int result = 0;
 		result = boardLogic.boardInsert(pmap);
 		if(result == 1) {
-			//res.sendRedirect("./getBoardList.sp4");
+			res.sendRedirect("./getBoardList.sp4");
 		}
 		else {
 			res.sendRedirect("등록실패 페이지 이동처리");
+		}
+	}
+	public void boardDelete(HttpServletRequest req, HttpServletResponse res) 
+	throws Exception
+	{
+		logger.info("boardDelete호출 성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String,Object> pmap = new HashMap<>();
+		//사용자가 입력한 값이나 서버에서 클라이언트에게 요청한 값 넘김.
+		hmb.bind(pmap);
+		int result = 0;
+		result = boardLogic.boardDelete(pmap);
+		if(result == 1) {
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			res.sendRedirect("삭제실패");
 		}
 	}
 }

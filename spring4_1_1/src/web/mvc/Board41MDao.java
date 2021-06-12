@@ -36,6 +36,12 @@ public class Board41MDao {
 		sqlSessionTemplate.insert("boardMInsert",pmap);
 		return result;
 	}
+	public int boardMDelete(Map<String, Object> pmap) {
+		logger.info("boardMInsert 호출 성공");
+		int result = 0;
+		sqlSessionTemplate.insert("boardMDel",pmap);
+		return result;
+	}
 	public void bmStepUpdate(Map<String, Object> pmap) {
 		logger.info("bmStepUpdate 호출 성공");
 		sqlSessionTemplate.insert("bmStepUpdate",pmap);

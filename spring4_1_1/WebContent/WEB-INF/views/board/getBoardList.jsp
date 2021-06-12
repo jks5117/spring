@@ -24,30 +24,7 @@
 	<script type="text/javascript" src="<%=path.toString()%>js/jquery.min.js"></script>
 	<script type="text/javascript" src="<%=path.toString()%>js/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
-		function boardSel(){
-			$('#dg_board').datagrid({
-				url:'./jsonGetBoardList.sp4',
-				onLoadSuccess: function(){
-					alert("조회 호출 성공");
-				},
-				onLoadError: function(){
-					alert("조회 호출 실패");
-				}
-			});
-		}
-		function boardIns(){
-			
-		}
-		function boardUpd(){
-			
-		}
-		function boardDel(){
-			
-		}
-	</script>
-</head>
-<body>
-<script type="text/javascript">
+
 	$(document).ready(function() {
 		$('#dg_board').datagrid({
 			columns : [[ 
@@ -58,24 +35,41 @@
 				{field:'BM_HIT',title:'조회수',width:100,align:'center'}
 			]]
 		});
-	    $('#btn_sel').bind('click', function(){
-	        //alert('조회');
-	        boardSel();
-	    });
-	    $('#btn_ins').bind('click', function(){
-	        //alert('입력');
-	        boardIns();
-	    });
-	    $('#btn_upd').bind('click', function(){
-	        //alert('수정');
-	        boardUpd();
-	    });
-	    $('#btn_del').bind('click', function(){
-	        //alert('삭제');
-	        boardDel();
-	    });
+	
+		$('#btn_sel').bind('click', function(){
+		    boardSel();
+		});
+		$('#btn_ins').bind('click', function(){
+		    boardIns();
+		});
+		$('#btn_upd').bind('click', function(){
+		    boardUpd();
+		});
+		$('#btn_del').bind('click', function(){
+		    boardDel();
+		});
+		function boardSel() {
+			$('#dg_board').datagrid({
+				url : './jsonGetBoardList.sp4',
+				onLoadSuccess : function() {
+					console.log('성공');
+				}
+			});
+		}
+		function boardIns(){
+			$('#dlg_ins').dialog('open')
+			
+		}
+		function boardUpd(){
+			
+		}
+		function boardDel(){
+			
+		}
 	});
-</script>
+	</script>
+</head>
+<body>
 	<table id="dg_board" class="easyui-datagrid" data-options="title:'게시판',toolbar:'#tb_board'" style="width: 1000px; height: 350px">
 <!-- 		<thead>
 			<tr>
@@ -104,7 +98,7 @@ for (int i = 0; i < size; i++) {
 %>
 			<tr>
 				<td><%=rmap.get("BM_NO")%></td>
-				<td><%=rmap.get("BM_TITLE")%></td>
+				<td><a href="getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO")%>"><%=rmap.get("BM_TITLE")%></a></td>
 				<td><%=rmap.get("BM_DATE")%></td>
 				<td><%=rmap.get("BS_FILE")%></td>
 				<td><%=rmap.get("BM_HIT")%></td>
@@ -121,5 +115,15 @@ for (int i = 0; i < size; i++) {
 			<a id="btn_upd" href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true">수정</a> 
 			<a id="btn_del" href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a>
 		</div>
+		<!--=========================== [[글쓰기 화면 시작]] =============================-->
+	    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'false'" style="width:600px;height:350px;padding:10px">
+	        <div style="margin-bottom:20px">
+	            <input class="easyui-textbox" label="제목 " labelPosition="top" data-options="prompt:'제목 입력해라...',validType:'title'" style="width:100%;">
+	        </div>
+	        <div>
+	            <a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px">Register</a>
+	        </div>
+	    </div>    
+	    <!--=========================== [[글쓰기 화면   끝 ]] =============================-->
 </body>
 </html>

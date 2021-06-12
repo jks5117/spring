@@ -19,4 +19,10 @@ public class Board41SDao {
 		sqlSessionTemplate.insert("boardSInsert",pmap);
 		return result;
 	}
+	public int boardSDelete(Map<String, Object> pmap) {
+		logger.info("boardSDelete 호출 성공");
+		int result=0;
+		sqlSessionTemplate.insert("boardSDel",pmap);
+		return result;
+	}
 }
