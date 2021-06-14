@@ -25,4 +25,10 @@ public class Board41SDao {
 		sqlSessionTemplate.insert("boardSDel",pmap);
 		return result;
 	}
+	public int boardHitCount(int i) {
+		logger.info("boardSDelete 호출 성공");
+		int result=0;
+		sqlSessionTemplate.insert("boardSDel",i);
+		return result;
+	}
 }

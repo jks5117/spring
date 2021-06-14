@@ -52,8 +52,8 @@
 		$("#dlg_boardAdd").dialog('open');
 	}
 	
-	function boardDelView(){
-		$("#dlg_boardAdd").dialog('open');
+	function boardList(){
+		location.href="getBoardList.sp4";
 	}
 	
 	
@@ -86,7 +86,7 @@
 	 <div id="tb_read" style="padding:2px 5px;" align="center">
 	    <a href="javascript:repleForm()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">댓글쓰기</a>
 	    <a href="javascript:updateForm()" class="easyui-linkbutton" iconCls="icon-add" plain="true">수정</a>
-	    <a href="javascript:boardDelView()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">삭제</a>
+	    <a href="boardDelete.sp4?bm_no=<%=bm_no%>" class="easyui-linkbutton" iconCls="icon-remove" plain="true">삭제</a>
 	    <a href="javascript:boardList()" class="easyui-linkbutton" iconCls="icon-search" plain="true">목록</a>
 	</div>
 	

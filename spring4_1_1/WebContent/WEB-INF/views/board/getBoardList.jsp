@@ -48,28 +48,40 @@
 		$('#btn_del').bind('click', function(){
 		    boardDel();
 		});
-		function boardSel() {
-			$('#dg_board').datagrid({
-				url : './jsonGetBoardList.sp4',
-				onLoadSuccess : function() {
-					console.log('성공');
-				}
-			});
-		}
-		function boardIns(){
-			$('#dlg_ins').dialog('open')
-			
-		}
-		function boardUpd(){
-			
-		}
-		function boardDel(){
-			
-		}
 	});
 	</script>
 </head>
 <body>
+<script>
+function boardSel() {
+	$('#dg_board').datagrid({
+		url : './getBoardList.sp4',
+		onLoadSuccess : function() {
+			console.log('성공');
+		}
+	});
+}
+function boardIns(){
+	$('#dlg_ins').dialog('open')
+	
+}
+function boardUpd(){
+	
+}
+function boardDel(){
+	
+}
+function register(){
+	console.log('테스트');
+	const title = document.getElementById('title').value;
+	const content = document.getElementById('content').value;
+	const writer = document.getElementById('writer').value;
+	const file = document.getElementById('file').value;
+	const email = document.getElementById('email').value;
+	const pw = document.getElementById('pw').value;
+	location.href="boardInsert.sp4?bm_title="+title+"&bs_file="+file+"&bm_writer="+writer+"&bm_email="+email+"&bm_content="+content+"&bm_pw="+pw;
+}
+</script>
 	<table id="dg_board" class="easyui-datagrid" data-options="title:'게시판',toolbar:'#tb_board'" style="width: 1000px; height: 350px">
 <!-- 		<thead>
 			<tr>
@@ -113,17 +125,40 @@ for (int i = 0; i < size; i++) {
 			<a id="btn_sel" href="#" class="easyui-linkbutton" iconCls="icon-search" plain="true">조회</a> 
 			<a id="btn_ins" href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true">입력</a> 
 			<a id="btn_upd" href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true">수정</a> 
-			<a id="btn_del" href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a>
+			<!-- <a id="btn_del" href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a> -->
 		</div>
 		<!--=========================== [[글쓰기 화면 시작]] =============================-->
-	    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'false'" style="width:600px;height:350px;padding:10px">
-	        <div style="margin-bottom:20px">
-	            <input class="easyui-textbox" label="제목 " labelPosition="top" data-options="prompt:'제목 입력해라...',validType:'title'" style="width:100%;">
-	        </div>
-	        <div>
-	            <a href="#" class="easyui-linkbutton" iconCls="icon-ok" style="width:100%;height:32px">Register</a>
-	        </div>
-	    </div>    
-	    <!--=========================== [[글쓰기 화면   끝 ]] =============================-->
+	    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'true'" style="width:650px;height:650px;padding:10px">
+		<form>
+			<div style="margin-bottom: 20px">
+				<input type="text" id="title" class="easyui-textbox" label="제목"
+					labelPosition="top" style="width:60%;">
+			</div>
+			<div style="margin-bottom: 20px">
+				<input type="text" id="content" class="easyui-textbox" label="내용"
+					labelPosition="top" style="width: 100%;height:120px;">
+			</div>
+			<div style="margin-bottom: 20px">
+				<input type="text" id="writer" class="easyui-textbox" label="작성자"
+					labelPosition="top" style="width:30%;">
+			</div>
+			<div style="margin-bottom: 20px">
+				<input type="text" id="file" class="easyui-textbox" label="첨부파일"
+					labelPosition="top" style="width: 100%;">
+			</div>
+			<div style="margin-bottom: 20px">
+				<input type="text" id="email" class="easyui-textbox" label="이메일"
+					labelPosition="top" style="width: 40%;">
+			</div>
+			<div style="margin-bottom: 20px">
+				<input type="password" id="pw" class="easyui-textbox" label="비밀번호"
+					labelPosition="top" style="width: 20%;">
+			</div>
+			<div>
+				<a href="javascript:register()" class="easyui-linkbutton"
+					iconCls="icon-ok" style="width: 100%; height: 32px">등록</a>
+			</div>
+		</form>
+		<!--=========================== [[글쓰기 화면   끝 ]] =============================-->
 </body>
 </html>

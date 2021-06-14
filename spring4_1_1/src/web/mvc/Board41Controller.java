@@ -62,6 +62,9 @@ public class Board41Controller extends MultiActionController {
 		HashMapBinder hmb = new HashMapBinder(req);
 		Map<String,Object> target = new HashMap<>();
 		hmb.bind(target);//bm_no값 담음
+		
+		target.put("gubun", "detail");///뭥미???????????????????
+		
 		logger.info("target : " + target.get("bm_no"));//
 		List<Map<String,Object>> boardDetail = null;
 		boardDetail = boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'

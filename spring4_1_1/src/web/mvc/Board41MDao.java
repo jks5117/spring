@@ -42,6 +42,10 @@ public class Board41MDao {
 		sqlSessionTemplate.insert("boardMDel",pmap);
 		return result;
 	}
+	public void hitCount(int bm_no) {
+		logger.info("hitCount 호출 성공");
+		sqlSessionTemplate.update("hitCount",bm_no);
+	}
 	public void bmStepUpdate(Map<String, Object> pmap) {
 		logger.info("bmStepUpdate 호출 성공");
 		sqlSessionTemplate.insert("bmStepUpdate",pmap);
@@ -51,6 +55,12 @@ public class Board41MDao {
 		logger.info("getBmGroup 호출 성공");
 		int result = 0;
 		result = sqlSessionTemplate.selectOne("getBmGroup");
+		return result;
+	}
+	public int getBmNo() {
+		logger.info("getBmGroup 호출 성공");
+		int result = 0;
+		result = sqlSessionTemplate.selectOne("getBmNo");
 		return result;
 	}
 	
