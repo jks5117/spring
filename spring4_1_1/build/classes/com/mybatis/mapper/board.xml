@@ -39,7 +39,7 @@
 		INSERT INTO board_master2019(bm_no, bm_title, bm_writer, bm_email
 		                           , bm_content, bm_date, bm_group, bm_pos, bm_step, bm_pw) 
 		                      values(#{bm_no},#{bm_title},#{bm_writer},#{bm_email}
-		                           , #{bm_content}, to_char(sysdate, 'YYYY-MM-DD'), 0,0,0,#{bm_pw}
+		                           , #{bm_content}, to_char(sysdate, 'YYYY-MM-DD'), #{bm_group}, #{bm_pos}, #{bm_step}, #{bm_pw}
 		                            )
 	</insert>
 	<insert id="boardSInsert" parameterType="map">
@@ -58,7 +58,8 @@
 	</update>
 	<select id="getBoardList" parameterType="map" resultType="map">
 		 SELECT bm.bm_no, bm.bm_title, bm.bm_writer, bm.bm_email, bm.bm_content, bm.bm_hit, bm.bm_date
-			  , bm.bm_group, bm.bm_pos, bm.bm_step, bm.bm_pw, bs.bs_file
+			  , bm.bm_group, bm.bm_pos, bm.bm_step, bm.bm_pw, 
+			  nvl(bs.bs_file, 'no files') bs_file
 		   FROM board_master2019 bm
 		       ,board_sub2019 bs
 		  WHERE bm.bm_no = bs.bm_no(+)	

@@ -33,7 +33,13 @@
 				{field:'BM_DATE',title:'작성일',width:200,align:'center'}, 
 				{field:'BS_FILE',title:'첨부파일',width:200,align:'center'}, 
 				{field:'BM_HIT',title:'조회수',width:100,align:'center'}
-			]]
+			]],
+			toolbar: '#tb_board2',
+	         onDblClickCell: function(index, field, value){
+	            if("BS_FILE" == field) {
+	               location.href="download.jsp?bs_file="+value;
+	            }
+	         }
 		});
 	
 		$('#btn_sel').bind('click', function(){
@@ -65,24 +71,19 @@ function boardIns(){
 	$('#dlg_ins').dialog('open')
 	
 }
+function insAction(){
+	console.log('입력액션');
+	$('#board_ins').submit();
+	
+}
 function boardUpd(){
 	
 }
 function boardDel(){
 	
 }
-function register(){
-	console.log('테스트');
-	const title = document.getElementById('title').value;
-	const content = document.getElementById('content').value;
-	const writer = document.getElementById('writer').value;
-	const file = document.getElementById('file').value;
-	const email = document.getElementById('email').value;
-	const pw = document.getElementById('pw').value;
-	location.href="boardInsert.sp4?bm_title="+title+"&bs_file="+file+"&bm_writer="+writer+"&bm_email="+email+"&bm_content="+content+"&bm_pw="+pw;
-}
 </script>
-	<table id="dg_board" class="easyui-datagrid" data-options="title:'게시판',toolbar:'#tb_board'" style="width: 1000px; height: 350px">
+	<table id="dg_board" class="easyui-datagrid" data-options="title:'1',toolbar:'#tb_board'" style="width: 1000px; height: 350px">
 <!-- 		<thead>
 			<tr>
 				<th>글번호</th>
@@ -128,37 +129,40 @@ for (int i = 0; i < size; i++) {
 			<!-- <a id="btn_del" href="#" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">삭제</a> -->
 		</div>
 		<!--=========================== [[글쓰기 화면 시작]] =============================-->
-	    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'true'" style="width:650px;height:650px;padding:10px">
-		<form>
+	    <div id="dlg_ins" class="easyui-dialog" title="글쓰기" data-options="iconCls:'icon-save', closed:'true'" 
+	    	style="width:650px;height:650px;padding:10px">
+	   		<form id="board_ins" method="post" enctype="multipart/form-data" action="boardInsert.sp4">
+
 			<div style="margin-bottom: 20px">
-				<input type="text" id="title" class="easyui-textbox" label="제목"
+				<input type="text" name="bm_title" class="easyui-textbox" label="제목"
 					labelPosition="top" style="width:60%;">
 			</div>
 			<div style="margin-bottom: 20px">
-				<input type="text" id="content" class="easyui-textbox" label="내용"
+				<input type="text" name="bm_content" class="easyui-textbox" label="내용"
 					labelPosition="top" style="width: 100%;height:120px;">
 			</div>
 			<div style="margin-bottom: 20px">
-				<input type="text" id="writer" class="easyui-textbox" label="작성자"
+				<input type="text" name="bm_writer" class="easyui-textbox" label="작성자"
 					labelPosition="top" style="width:30%;">
 			</div>
 			<div style="margin-bottom: 20px">
-				<input type="text" id="file" class="easyui-textbox" label="첨부파일"
-					labelPosition="top" style="width: 100%;">
+				<input type="text" name="bs_file" class="easyui-filebox" label="첨부파일"
+				    labelPosition="top" style="width: 40%;">
 			</div>
 			<div style="margin-bottom: 20px">
-				<input type="text" id="email" class="easyui-textbox" label="이메일"
+				<input type="text" name="bm_email" class="easyui-textbox" label="이메일"
 					labelPosition="top" style="width: 40%;">
 			</div>
 			<div style="margin-bottom: 20px">
-				<input type="password" id="pw" class="easyui-textbox" label="비밀번호"
+				<input type="password" name="bm_pw" class="easyui-textbox" label="비밀번호"
 					labelPosition="top" style="width: 20%;">
 			</div>
-			<div>
-				<a href="javascript:register()" class="easyui-linkbutton"
-					iconCls="icon-ok" style="width: 100%; height: 32px">등록</a>
-			</div>
 		</form>
+			<div id="ft_ins">
+				<a href="javascript:insAction()" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true">저장</a>
+				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true">삭제</a>
+			</div>
+		</div>
 		<!--=========================== [[글쓰기 화면   끝 ]] =============================-->
 </body>
 </html>

@@ -1,0 +1,8 @@
+$('dg_board').datagrid({
+url:'jsonGetBoardList.sp4',
+});
+
+
+
+class = .
+id = #

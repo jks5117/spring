@@ -58,11 +58,13 @@ public class Board41Logic {
 			pmap.put("bm_step",0);
 		}
 		//첨부파일이 있어?
-		if((pmap.get("bs_file")!=null)&(pmap.get("bs_file").toString().length() > 0)) {
+		if((pmap.get("bs_file")!=null)&&(pmap.get("bs_file").toString().length() > 0)) {
+			logger.info("첨부파일 로직 경유");
 			//pmap.put("bm_no", bm_no);
 			pmap.put("bs_seq", 1);
 			boardSDao.boardSInsert(pmap);
 		}
+		
 		boardMDao.boardMInsert(pmap);
 		result = 1;
 		return result;

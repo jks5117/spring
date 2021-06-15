@@ -58,7 +58,7 @@ public class Board41MDao {
 		return result;
 	}
 	public int getBmNo() {
-		logger.info("getBmGroup 호출 성공");
+		logger.info("getBmNo 호출 성공");
 		int result = 0;
 		result = sqlSessionTemplate.selectOne("getBmNo");
 		return result;
