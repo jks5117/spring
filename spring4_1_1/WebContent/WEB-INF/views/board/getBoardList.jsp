@@ -32,6 +32,7 @@
 				{field:'BM_TITLE',title:'제목',width:300,align:'left'}, 
 				{field:'BM_DATE',title:'작성일',width:200,align:'center'}, 
 				{field:'BS_FILE',title:'첨부파일',width:200,align:'center'}, 
+				{field:'BM_WRITER',title:'작성자',width:100,align:'center'},
 				{field:'BM_HIT',title:'조회수',width:100,align:'center'}
 			]],
 			toolbar: '#tb_board2',
@@ -73,7 +74,7 @@ function boardIns(){
 }
 function insAction(){
 	console.log('입력액션');
-	$('#board_ins').submit();
+	$('#board_ins').submit()
 	
 }
 function boardUpd(){
@@ -83,7 +84,7 @@ function boardDel(){
 	
 }
 </script>
-	<table id="dg_board" class="easyui-datagrid" data-options="title:'1',toolbar:'#tb_board'" style="width: 1000px; height: 350px">
+	<table id="dg_board" class="easyui-datagrid" data-options="title:'게시판',toolbar:'#tb_board'" style="width: 1050px; height: 350px">
 <!-- 		<thead>
 			<tr>
 				<th>글번호</th>
@@ -108,13 +109,29 @@ for (int i = 0; i < size; i++) {
 	Map<String, Object> rmap = boardList.get(i);
 	if (i == size)
 		break;
-%>
+%>			
 			<tr>
-				<td><%=rmap.get("BM_NO")%></td>
-				<td><a href="getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO")%>"><%=rmap.get("BM_TITLE")%></a></td>
-				<td><%=rmap.get("BM_DATE")%></td>
-				<td><%=rmap.get("BS_FILE")%></td>
-				<td><%=rmap.get("BM_HIT")%></td>
+   			   <td><%=rmap.get("BM_NO")%></td>
+			   <td>		
+<%
+   					String imgPath = "\\board\\";
+   					if(Integer.parseInt(rmap.get("BM_POS").toString())>0){
+    					  for(int j=0;j<Integer.parseInt(rmap.get("BM_POS").toString());j++){
+      					   out.print("&nbsp;&nbsp;");
+     					  }
+%>
+   <!-- 여기는 html 땅이다. -->
+   					<img src="<%=imgPath%>reply.gif" border="0">
+<%
+   					}////////////end of if
+%>
+			
+			    
+			   <a href="getBoardDetail.sp4?bm_no=<%=rmap.get("BM_NO")%>" style="text-decoration:none;"><%=rmap.get("BM_TITLE") %></a></td>
+               <td><%=rmap.get("BM_DATE") %></td>
+               <td><a href="download.jsp?bs_file=<%=rmap.get("BS_FILE")%>" style="text-decoration:none;"><%=rmap.get("BS_FILE") %></a></td>
+               <td><%=rmap.get("BM_WRITER")%></td>
+               <td><%=rmap.get("BM_HIT")%></td>
 			</tr>
 <%
 	} ///////////end of for

@@ -55,6 +55,9 @@
 	function boardList(){
 		location.href="getBoardList.sp4";
 	}
+	function addAction(){
+		$('#f_boardAdd').submit()
+	}
 	
 	
 </script>
@@ -96,8 +99,8 @@
 form전송시 encType옵션이 추가되면 request객체로 사용자가 입력한 값을 꺼낼 수 없다.
 MultipartRequest  => cos.jar
  -->	
-	<form id="f_boardAdd" method="get">
-	<input type="hidden" name="bm_no" value="<%=bm_no%>">
+	<form id="f_boardAdd" method="post" enctype="multipart/form-data" action="boardInsert.sp4">
+	<%-- <input type="hidden" name="bm_no" value="<%=bm_no%>"> --%>
 	<input type="hidden" name="bm_group" value="<%=bm_group%>">
 	<input type="hidden" name="bm_pos" value="<%=bm_pos%>">
 	<input type="hidden" name="bm_step" value="<%=bm_step%>">
