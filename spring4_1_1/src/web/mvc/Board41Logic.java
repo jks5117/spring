@@ -70,7 +70,7 @@ public class Board41Logic {
 		return result;
 	}
 	public int boardDelete(Map<String, Object> pmap) {
-		logger.info("boardInsert 호출 성공");
+		logger.info("boardDelete 호출 성공");
 		int result = 0;
 		int mresult = 0;
 		int sresult = 0;
@@ -83,6 +83,31 @@ public class Board41Logic {
 		else{
 			result=0;
 		}
+		return result;
+	}
+	public int boardUpdate(Map<String, Object> pmap) {
+		logger.info("boardUpdate 호출 성공");
+		int result = 0;
+		int mresult = 0;
+		int sresult = 0;
+		int nofile = 1;
+		
+		mresult = boardMDao.boardMUpdate(pmap);
+		sresult = boardSDao.boardSUpdate(pmap);
+		if(mresult == sresult) {
+			result = 1;
+		}
+		logger.info(result);
+		return result;
+	}
+	
+	
+	//로직
+	public List<Map<String,Object>> getBmNoo(Map<String,Object> target) {
+		logger.info("boardUpdate 호출 성공");
+		List<Map<String,Object>> result = null;
+		result = boardMDao.getBmNoo(target);
+		logger.info(" boardUpdate로직 : " +result);
 		return result;
 	}
 }

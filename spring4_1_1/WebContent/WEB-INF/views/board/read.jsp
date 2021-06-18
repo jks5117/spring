@@ -18,6 +18,7 @@
 	String bm_group			= null;
 	String bm_pos 			= null;
 	String bm_step 			= null;
+	String bs_file 			= null;
 	
 	if (boardDetail != null) {
 		size = boardDetail.size();
@@ -32,6 +33,7 @@
 		bm_group = boardDetail.get(0).get("BM_GROUP").toString();
 		bm_pos = boardDetail.get(0).get("BM_POS").toString();
 		bm_step = boardDetail.get(0).get("BM_STEP").toString();
+		bs_file = boardDetail.get(0).get("BS_FILE").toString();
 	}
 	out.print("size:" + size);
 %>
@@ -56,8 +58,16 @@
 		location.href="getBoardList.sp4";
 	}
 	function addAction(){
-		$('#f_boardAdd').submit()
+		$('#f_boardAdd').submit();
 	}
+	
+	function updAction(){
+		$('#f_boardEdit').submit();
+	}
+	function updateForm(){
+		$('#dlg_upd').dialog('open');
+	}
+	
 	
 	
 </script>
@@ -80,6 +90,10 @@
 	    	<tr>
 	    	<td>내용</td>
 	    	<td><input id="bm_content" value="<%=bm_content%>" name="bm_content" data-options="multiline:'true', width:'570px', height:'90px'" class="easyui-textbox"></td>
+	    	</tr>
+	    	<tr>
+	    	<td>파일첨부</td>
+	    	<td><input id="bs_file" value="<%=bs_file%>" name="bs_file" data-options="multiline:'true', width:'570px', height:'90px'" class="easyui-filebox"></td>
 	    	</tr>
 	    	<tr>
 	    	<td>비밀번호</td>
@@ -136,15 +150,72 @@ MultipartRequest  => cos.jar
 				<input class="easyui-textbox" data-options="width:'100px'" id="bm_pw" name="bm_pw" required>
 			</td>
 		</tr>
+		<tr>			
+			<td width="100px">첨부파일</td>
+			<td width="500px">
+				<input class="easyui-filebox" data-options="width:'250px'" id="bs_file" name="bs_file" required>
+			</td>
+		</tr>
 	</table>
 	</form>
 </div>
 <!-- 입력 화면 버튼 추가 -->
 <div id="tbar_boardAdd" align="right">
 	<a href="javascript:addAction()" class="easyui-linkbutton" iconCls="icon-save">저장</a>
-	<a href="javascript:$('#dlg_boardAdd').dialog('close')" 
-	   class="easyui-linkbutton" iconCls="icon-cancel">닫기</a>
+		<a href="javascript:$('#dlg_upd').dialog('close')" class="easyui-linkbutton" iconCls="icon-cancel">닫기</a>
 </div>
-		<!-- 댓글쓰기  끝  -->	    	
+		<!-- 댓글쓰기  끝  -->	    
+		
+			<!-- 글수정  시작  -->	    
+<div id="dlg_upd" title="글수정" class="easyui-dialog" style="width:600px;height:400px;padding:10px" data-options="closed:'true',modal:'true',footer:'#tbar_boardAdd'">	
+	<form id="f_boardEdit" method="post" enctype="multipart/form-data" action="boardUpdate.sp4">
+	<input type="hidden" name="bm_no" value="<%=bm_no%>">
+	<input type="hidden" name="isFile" value="<%=bs_file %>">
+	<table>
+		<tr>
+			<td width="100px">제목</td>
+			<td width="500px">
+				<input class="easyui-textbox" value="<%=bm_title%>" data-options="width:'350px'" id="bm_title" name="bm_title" required>
+			</td>
+		</tr>
+		<tr>	
+			<td width="100px">작성자</td>
+			<td width="500px">
+				<input class="easyui-textbox" value="<%=bm_writer%>" data-options="width:'150px'" id="bm_writer" name="bm_writer" required>
+			</td>
+		</tr>
+		<tr>
+			<td width="100px">이메일</td>
+			<td width="500px">
+				<input class="easyui-textbox" value="<%=bm_email%>" data-options="width:'250px'" id="bm_email" name="bm_email" required>
+			</td>
+		</tr>
+		<tr>
+			<td width="100px">첨부파일</td>
+			<td width="500px">
+				<input class="easyui-filebox" value="<%=bs_file%>" data-options="width:'250px'" id="bs_file" name="bs_file" required>
+			</td>
+		</tr>
+		<tr>			
+			<td width="100px">내용</td>
+			<td width="500px">
+				<input class="easyui-textbox" value="<%=bm_content%>" id="bm_content" name="bm_content" data-options="multiline:'true',width:'400px',height:'90px'" required>
+			</td>
+		</tr>
+		<tr>			
+			<td width="100px">비번</td>
+			<td width="500px">
+				<input class="easyui-textbox" value="<%=bm_pw%>" data-options="width:'100px'" id="bm_pw" name="bm_pw" required>
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+<!-- 입력 화면 버튼 추가 -->
+<div id="tbar_boardAdd" align="right">
+	<a href="javascript:updAction()" class="easyui-linkbutton" iconCls="icon-save">저장</a>
+	<a href="javascript:$('#dlg_upd').dialog('close')" class="easyui-linkbutton" iconCls="icon-cancel">닫기</a>
+</div>
+			<!-- 글수정  끝  -->	    
 </body>
 </html>

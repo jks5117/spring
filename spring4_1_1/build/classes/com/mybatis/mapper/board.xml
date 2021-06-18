@@ -3,7 +3,7 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.mybatis.mapper.BoardMapper">
-	<resultMap id="boardMMap" type="bmVO">
+	<!-- <resultMap id="boardMMap" type="bmVO">
 	 <result property="bm_no" column="bm_no"/>
 	 <result property="bm_title" column="bm_title"/>
 	 <result property="bm_date" column="bm_date"/>
@@ -17,7 +17,7 @@
 	 <result property="bs_seq" column="bs_seq"/>
 	 <result property="bs_file" column="bs_file"/>
 	 <result property="bs_size" column="bs_size"/>
-	</resultMap>
+	</resultMap> -->
 	<delete id="boardMDel" parameterType="map">
 		DELETE FROM board_master2019 WHERE bm_no=#{bm_no}
 	</delete>
@@ -56,6 +56,21 @@
 		 WHERE bm_group = #{bm_group}
 		 <![CDATA[ and bm_step > #{bm_step} ]]>
 	</update>
+	<update id="bmUpdate" parameterType="map">
+		UPDATE board_master2019
+           SET bm_title = #{bm_title},
+               bm_writer = #{bm_writer},
+               bm_email = #{bm_email},
+               bm_content = #{bm_content},
+               bm_pw = #{bm_pw}
+         WHERE bm_no = #{bm_no}
+         
+	</update>
+	<update id="bsUpdate" parameterType="map">
+		UPDATE board_sub2019
+           SET bs_file = #{bs_file}
+         WHERE bm_no = #{bm_no}
+	</update>
 	<select id="getBoardList" parameterType="map" resultType="map">
 		 SELECT bm.bm_no, bm.bm_title, bm.bm_writer, bm.bm_email, bm.bm_content, bm.bm_hit, bm.bm_date
 			  , bm.bm_group, bm.bm_pos, bm.bm_step, bm.bm_pw, 
@@ -71,13 +86,20 @@
 		</if>	 
 		ORDER BY bm_group  desc, bm_step asc
 	</select>
-	<select id="getBoardMap" parameterType="map" resultMap="boardMMap">
+	<!-- <select id="getBoardMap" parameterType="map" resultMap="boardMMap">
 		 SELECT bm.bm_no, bm.bm_title, bm.bm_date, bs.bs_file, bm.bm_hit
 		  FROM board_master2019 bm
 		      ,board_sub2019 bs
 		 WHERE bm.bm_no = bs.bm_no(+)	
-	</select>
+	</select> -->
 	<select id="test" parameterType="map" resultType="string"> 
 		select TO_CHAR(sysdate, 'YYYY-MM-DD') from dual
+	</select> 
+	
+	
+	
+	<select id="test1" parameterType="map" resultType="map"> 
+		select bm_title from board_master2019
+		where bm_no=1
 	</select> 
 </mapper>

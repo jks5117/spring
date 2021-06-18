@@ -44,6 +44,7 @@
 		});
 	
 		$('#btn_sel').bind('click', function(){
+			//url : './getBoardList.sp4'
 		    boardSel();
 		});
 		$('#btn_ins').bind('click', function(){
@@ -62,11 +63,10 @@
 <script>
 function boardSel() {
 	$('#dg_board').datagrid({
-		url : './getBoardList.sp4',
-		onLoadSuccess : function() {
-			console.log('성공');
-		}
+		//url : './getBoardList.sp4',
+		//url : './getBmNoo.sp4',
 	});
+	location.href = './getBmNoo.sp4'
 }
 function boardIns(){
 	$('#dlg_ins').dialog('open')
@@ -84,7 +84,7 @@ function boardDel(){
 	
 }
 </script>
-	<table id="dg_board" class="easyui-datagrid" data-options="title:'게시판',toolbar:'#tb_board'" style="width: 1050px; height: 350px">
+	<table id="dg_board" class="easyui-datagrid" data-options="title:'게시판',toolbar:'#tb_board'" style="width: 1024px; height: 860px">
 <!-- 		<thead>
 			<tr>
 				<th>글번호</th>
@@ -103,7 +103,7 @@ if (size == 0) {
 				<th colspan="5">조회결과가 없습니다.</th>
 			</tr>
 <%
-} 
+}
 else {//조회 결과가 있는데...
 for (int i = 0; i < size; i++) {
 	Map<String, Object> rmap = boardList.get(i);

@@ -1,0 +1,9 @@
+1. 웹 레포 만들기
+2. 웹레포 로컬로 내리기 (clone -> .git폴더 생성)
+3. --global 메일과 이름 설정확인
+4. add -> commit
+5. push (계정 확인 요청)
+6. remote 지우고 다시 remote하기 ssh로 
+7. push
+
+git@github.com:jks5117/spring4.git

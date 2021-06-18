@@ -1,0 +1,487 @@
+C:\Users\chokiseol
+λ cd..
+
+C:\Users
+λ cd..
+
+C:\
+λ mkdir git_step1
+
+C:\
+λ cd git_step1
+
+C:\git_step1
+λ git init
+Initialized empty Git repository in C:/git_step1/.git/
+
+C:\git_step1 (master)
+λ ls -al
+total 12
+drwxr-xr-x 1 chokiseol 197609 0  4월 30 09:58 ./
+drwxr-xr-x 1 chokiseol 197609 0  4월 30 09:58 ../
+drwxr-xr-x 1 chokiseol 197609 0  4월 30 09:58 .git/
+
+C:\git_step1 (master)
+λ echo aa > a.txt
+
+C:\git_step1 (master)
+λ ls
+a.txt
+
+C:\git_step1 (master)
+λ git hist
+git: 'hist' is not a git command. See 'git --help'.
+
+The most similar command is
+        bisect
+
+C:\git_step1 (master)
+λ git config --global alias.hist
+
+C:\git_step1 (master)
+λ git config --global alias.hist "log --graph --all --pretty=format:'%C(yellow)[%ad]%C(reset) %C(green)[%h]%C(reset) |% C(white)%s %C(bold red){{%an}}%C(reset) %C(blue)%d%C(reset)' --date=short"
+
+C:\git_step1 (master)
+λ git hist
+
+C:\git_step1 (master)
+λ git add .
+
+C:\git_step1 (master)
+λ git commit -m "a"
+[master (root-commit) e3db265] a
+ 1 file changed, 1 insertion(+)
+ create mode 100644 a.txt
+
+C:\git_step1 (master)
+λ git hist
+* [2021-04-30] [e3db265] | a {{jks5117}}  (HEAD -> master)
+
+C:\git_step1 (master)
+λ echo bb > b.txt
+
+C:\git_step1 (master)
+λ git add .
+
+C:\git_step1 (master)
+λ git commit - m "b"
+error: pathspec '-' did not match any file(s) known to git
+error: pathspec 'm' did not match any file(s) known to git
+error: pathspec 'b' did not match any file(s) known to git
+
+C:\git_step1 (master)
+λ ls
+a.txt  b.txt
+
+C:\git_step1 (master)
+λ git hist
+* [2021-04-30] [e3db265] | a {{jks5117}}  (HEAD -> master)
+
+C:\git_step1 (master)
+λ git commit -m "b"
+[master e300c73] b
+ 1 file changed, 1 insertion(+)
+ create mode 100644 b.txt
+
+C:\git_step1 (master)
+λ ls
+a.txt  b.txt
+
+C:\git_step1 (master)
+λ git hist
+* [2021-04-30] [e300c73] | b {{jks5117}}  (HEAD -> master)
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (master)
+λ echo cc > c.txt
+C:\git_step1 (master)
+λ git add c.txt
+
+C:\git_step1 (master)
+λ git commit -m "c"
+[master fadbc87] c
+ 1 file changed, 1 insertion(+)
+ create mode 100644 c.txt
+
+C:\git_step1 (master)
+λ git hist
+* [2021-04-30] [fadbc87] | c {{jks5117}}  (HEAD -> master)
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (master)
+λ echo dd > d.txt
+
+C:\git_step1 (master)
+λ add d.txt
+'add'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+C:\git_step1 (master)
+λ git add d.txt
+
+C:\git_step1 (master)
+λ git commit -m "d"
+[master 304d839] d
+ 1 file changed, 1 insertion(+)
+ create mode 100644 d.txt
+
+C:\git_step1 (master)
+λ git hist
+* [2021-04-30] [304d839] | d {{jks5117}}  (HEAD -> master)
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (master)
+λ git check out -b apple
+git: 'check' is not a git command. See 'git --help'.
+
+The most similar command is
+        checkout
+
+C:\git_step1 (master)
+λ git checkout - b apple
+error: pathspec '-' did not match any file(s) known to git
+error: pathspec 'b' did not match any file(s) known to git
+error: pathspec 'apple' did not match any file(s) known to git
+C:\git_step1 (master)
+λ git checkout -b apple
+Switched to a new branch 'apple'
+
+C:\git_step1 (apple)
+λ git hist
+* [2021-04-30] [304d839] | d {{jks5117}}  (HEAD -> apple, master)
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (apple)
+λ ls
+a.txt  b.txt  c.txt  d.txt
+
+C:\git_step1 (apple)
+λ git checkout master
+Switched to branch 'master'
+
+C:\git_step1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt
+
+C:\git_step1 (master)
+λ git branch
+  apple
+* master
+
+C:\git_step1 (master)
+λ git checkout apple
+Switched to branch 'apple'
+
+C:\git_step1 (apple)
+λ echo ee > e.txt
+
+C:\git_step1 (apple)
+λ git add .
+
+C:\git_step1 (apple)
+λ git commit -m "e"
+[apple e9b6371] e
+ 1 file changed, 1 insertion(+)
+ create mode 100644 e.txt
+
+C:\git_step1 (apple)
+λ git hist
+* [2021-04-30] [e9b6371] | e {{jks5117}}  (HEAD -> apple)
+* [2021-04-30] [304d839] | d {{jks5117}}  (master)
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (apple)
+λ echo ff > f.txt
+
+C:\git_step1 (apple)
+λ git add .
+
+C:\git_step1 (apple)
+λ git commit -m "f"
+[apple de07070] f
+ 1 file changed, 1 insertion(+)
+ create mode 100644 f.txt
+
+C:\git_step1 (apple)
+λ git hist
+* [2021-04-30] [de07070] | f {{jks5117}}  (HEAD -> apple)
+* [2021-04-30] [e9b6371] | e {{jks5117}}
+* [2021-04-30] [304d839] | d {{jks5117}}  (master)
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (apple)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1 (apple)
+λ git checkout master
+Switched to branch 'master'
+
+C:\git_step1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt
+
+C:\git_step1 (master)
+λ git checkout apple
+Switched to branch 'apple'
+
+C:\git_step1 (apple)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1 (apple)
+λ git checkout master
+Switched to branch 'master'
+
+C:\git_step1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt
+
+C:\git_step1 (master)
+λ ls -al
+total 20
+drwxr-xr-x 1 chokiseol 197609 0  4월 30 10:47 ./
+drwxr-xr-x 1 chokiseol 197609 0  4월 30 09:58 ../
+drwxr-xr-x 1 chokiseol 197609 0  4월 30 10:47 .git/
+-rw-r--r-- 1 chokiseol 197609 5  4월 30 10:11 a.txt
+-rw-r--r-- 1 chokiseol 197609 5  4월 30 10:17 b.txt
+-rw-r--r-- 1 chokiseol 197609 5  4월 30 10:35 c.txt
+-rw-r--r-- 1 chokiseol 197609 5  4월 30 10:36 d.txt
+
+C:\git_step1 (master)
+λ git checkout apple
+Switched to branch 'apple'
+C:\git_step1 (apple)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1 (apple)
+λ git hist
+* [2021-04-30] [de07070] | f {{jks5117}}  (HEAD -> apple)
+* [2021-04-30] [e9b6371] | e {{jks5117}}
+* [2021-04-30] [304d839] | d {{jks5117}}  (master)
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (apple)
+λ cd git_step1_original\
+지정된 경로를 찾을 수 없습니다.
+
+C:\git_step1 (apple)
+λ cd git_step1_original\
+지정된 경로를 찾을 수 없습니다.
+
+C:\git_step1 (apple)
+λ cd
+C:\git_step1
+
+C:\git_step1 (apple)
+λ cd..
+
+C:\
+λ git_step1_original\
+
+C:\git_step1_original (apple)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1_original (apple)
+λ git hist
+* [2021-04-30] [de07070] | f {{jks5117}}  (HEAD -> apple)
+* [2021-04-30] [e9b6371] | e {{jks5117}}
+* [2021-04-30] [304d839] | d {{jks5117}}  (master)
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+C:\git_step1_original (apple)
+λ cd..
+
+C:\
+λ cd..
+
+C:\
+λ ls
+'$Recycle.Bin'/                    eGov20210408/            PerfLogs/              'System Volume Information'/
+'$WINRE_BACKUP_PARTITION.MARKER'   git_step1/              'Program Files'/         TEMP/
+'$WinREAgent'/                     git_step1_original/     'Program Files (x86)'/   Users/
+ 3DP/                              git_step1_original.zip   ProgramData/            visual_web/
+ app/                              hiberfil.sys            'Quest Software'/        Windows/
+'Documents and Settings'@          OneDriveTemp/            Recovery/               Windows.old/
+ DumpStack.log.tmp                 pagefile.sys             swapfile.sys
+
+C:\
+λ cd git_step1
+
+C:\git_step1 (apple)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1 (apple)
+λ git checkout master
+Switched to branch 'master'
+
+C:\git_step1 (master)
+λ git merge apple
+Updating 304d839..de07070
+Fast-forward
+ e.txt | 1 +
+ f.txt | 1 +
+ 2 files changed, 2 insertions(+)
+ create mode 100644 e.txt
+ create mode 100644 f.txt
+
+C:\git_step1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+C:\git_step1 (master)
+λ git hist
+* [2021-04-30] [de07070] | f {{jks5117}}  (HEAD -> master, apple)
+* [2021-04-30] [e9b6371] | e {{jks5117}}
+* [2021-04-30] [304d839] | d {{jks5117}}
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (master)
+λ git checkout apple
+Switched to branch 'apple'
+
+C:\git_step1 (apple)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1 (apple)
+λ git hist
+* [2021-04-30] [de07070] | f {{jks5117}}  (HEAD -> apple, master)
+* [2021-04-30] [e9b6371] | e {{jks5117}}
+* [2021-04-30] [304d839] | d {{jks5117}}
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (apple)
+λ git checkout master
+Switched to branch 'master'
+
+C:\git_step1 (master)
+λ git branch -d apple
+Deleted branch apple (was de07070).
+
+C:\git_step1 (master)
+λ git hist
+* [2021-04-30] [de07070] | f {{jks5117}}  (HEAD -> master)
+* [2021-04-30] [e9b6371] | e {{jks5117}}
+* [2021-04-30] [304d839] | d {{jks5117}}
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1 (master)
+λ q
+'q'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+C:\git_step1 (master)
+λ cd..
+
+C:\
+λ cd git_step1_1
+
+C:\git_step1_1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1_1 (apple)
+λ git hist
+* [2021-04-30] [de07070] | f {{jks5117}}  (HEAD -> apple)
+* [2021-04-30] [e9b6371] | e {{jks5117}}
+* [2021-04-30] [304d839] | d {{jks5117}}  (master)
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1_1 (apple)
+λ git checkout master
+Switched to branch 'master'
+
+C:\git_step1_1 (master)
+λ git merge --no-ff apple
+Merge made by the 'recursive' strategy.
+ e.txt | 1 +
+ f.txt | 1 +
+ 2 files changed, 2 insertions(+)
+ create mode 100644 e.txt
+ create mode 100644 f.txt
+
+C:\git_step1_1 (master)
+λ git hist
+*   [2021-04-30] [acef449] | Merge branch 'apple' {{jks5117}}  (HEAD -> master)
+|\
+| * [2021-04-30] [de07070] | f {{jks5117}}  (apple)
+| * [2021-04-30] [e9b6371] | e {{jks5117}}
+|/
+* [2021-04-30] [304d839] | d {{jks5117}}
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1_1 (master)
+λ git branch -d apple
+Deleted branch apple (was de07070).
+
+C:\git_step1_1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1_1 (master)
+λ git hist
+*   [2021-04-30] [acef449] | Merge branch 'apple' {{jks5117}}  (HEAD -> master)
+|\
+| * [2021-04-30] [de07070] | f {{jks5117}}
+| * [2021-04-30] [e9b6371] | e {{jks5117}}
+|/
+* [2021-04-30] [304d839] | d {{jks5117}}
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1_1 (master)
+λ git branch -d apple
+error: branch 'apple' not found.
+
+C:\git_step1_1 (master)
+λ git branch
+* master
+
+C:\git_step1_1 (master)
+λ ls
+a.txt  b.txt  c.txt  d.txt  e.txt  f.txt
+
+C:\git_step1_1 (master)
+λ git hist
+*   [2021-04-30] [acef449] | Merge branch 'apple' {{jks5117}}  (HEAD -> master)
+|\
+| * [2021-04-30] [de07070] | f {{jks5117}}
+| * [2021-04-30] [e9b6371] | e {{jks5117}}
+|/
+* [2021-04-30] [304d839] | d {{jks5117}}
+* [2021-04-30] [fadbc87] | c {{jks5117}}
+* [2021-04-30] [e300c73] | b {{jks5117}}
+* [2021-04-30] [e3db265] | a {{jks5117}}
+
+C:\git_step1_1 (master)
+λ

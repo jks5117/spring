@@ -1,0 +1,43 @@
+톰캣서버 server.xml에서 URIEncoding="utf-8" 겟방식 
+beans
+이름은 있지만 내용은 없는 껍데기?
+
+페이지 이동
+redirect req x, session o 
+forward req o, session o
+include
+
+req없이는 session도 없다
+기억할 내용이 있어야 해서? 내용이 없는데 무슨 기억을 함
+
+cookie는 client(개인PC)에 저장 text로
+session은 server에 주소번지(cache)로 저장 (디버깅모드 x, server에 있어서)
+session id는 cookie에 text로 저장
+
+
+forward, redirect 는 webcontent 밑의 board폴더에서 불러와짐
+(ex. return "forward : xxx.jsp")
+
+model and view는 web-inf - views 에서 setviewname(xxx.jsp) 파일을 불러옴
+
+
+
+list, map
+
+
+프로시져
+
+dispatcher servlet
+컨트롤러들을 관리?
+
+부트
+
+DOM
+
+
+jsx와 js차이
+
+babel
+
+board/getboardlist.sp4 가 왜 web-inf를 타는지
+addobject("name", name)

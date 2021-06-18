@@ -22,9 +22,11 @@
 	class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
+				<prop key="/board/getBmNoo.sp4">board-controller</prop>
 				<prop key="/board/getBoardDetail.sp4">board-controller</prop>
 				<prop key="/board/boardHitCount.sp4">board-controller</prop>
 				<prop key="/board/boardInsert.sp4">board-controller</prop>
+				<prop key="/board/boardUpdate.sp4">board-controller</prop>
 				<prop key="/board/boardDelete.sp4">board-controller</prop>
 				<prop key="/board/getBoardList.sp4">board-controller</prop>
 				<prop key="/board/jsonGetBoardList.sp4">board-controller</prop>
@@ -43,13 +45,14 @@
 		<property name="mappings">
 			<props>
 				 <!-- easyui -->
+				<prop key="/board/getBmNoo.sp4">getBmNoo</prop>
 				<prop key="/board/getBoardDetail.sp4">getBoardDetail</prop>
 				<prop key="/board/boardHitCount.sp4">boardHitCount</prop>
 				<prop key="/board/getBoardList.sp4">getBoardList</prop>
 				<prop key="/board/boardInsert.sp4">boardInsert</prop>
+				<prop key="/board/boardUpdate.sp4">boardUpdate</prop>
 				<prop key="/board/boardDelete.sp4">boardDelete</prop>
 				<prop key="/board/jsonGetBoardList.sp4">jsonGetBoardList</prop>
-				
 				 <!-- bootstrap -->
 				<prop key="/bs_board/getBoardList.sp4">getBoardList</prop>
 				<prop key="/bs_board/boardInsert.sp4">boardInsert</prop>

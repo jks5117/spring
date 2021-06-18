@@ -47,35 +47,41 @@ public class Board41Controller extends MultiActionController {
 		hmb.bind(target);
 		List<Map<String,Object>> boardList = null;
 		boardList = boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
+		//List<Map<String, Object>> boardDetail = null;
+		//boardDetail = boardLogic.getBoardList(target);// where bm_no=? and bm_title LIKE '%'||?||'%'
 		logger.info("boardList: "+boardList);//
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/getBoardList");
 		mav.addObject("boardList", boardList);
+		mav.setViewName("board/getBoardList");
+		//ModelAndView mav1 = new ModelAndView();
+		//mav1.addObject("boardDetail",boardDetail);
+		//mav1.setViewName("board/getboardDetail");
+		
 		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
 		//view.forward(req, res);
 		return mav;
 	}
-	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res) 
-			throws Exception
-	{
+
+	public ModelAndView getBoardDetail(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		logger.info("getBoardDetail 호출 성공");
 		HashMapBinder hmb = new HashMapBinder(req);
-		Map<String,Object> target = new HashMap<>();
-		hmb.bind(target);//bm_no값 담음
-		
-		target.put("gubun", "detail");///뭥미???????????????????
-		
+		Map<String, Object> target = new HashMap<>();
+		hmb.bind(target);// bm_no값 담음
+
+		target.put("gubun", "detail");/// 뭥미???????????????????
+
 		logger.info("target : " + target.get("bm_no"));//
-		List<Map<String,Object>> boardDetail = null;
-		boardDetail = boardLogic.getBoardList(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
+		List<Map<String, Object>> boardDetail = null;
+		boardDetail = boardLogic.getBoardList(target);// where bm_no=? and bm_title LIKE '%'||?||'%'
 		logger.info("boardDetail : " + boardDetail);//
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/read");
 		mav.addObject("boardDetail", boardDetail);
-		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
-		//view.forward(req, res);
+		mav.setViewName("board/read");
+		// RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		// view.forward(req, res);
 		return mav;
 	}
+	
 	//json으로 내보내준다. - @RestController:String, @Controller:void, ModelAndView, String
 	//@RestController
 	public void jsonGetBoardList(HttpServletRequest req, HttpServletResponse res)
@@ -83,7 +89,8 @@ public class Board41Controller extends MultiActionController {
 	{
 		logger.info("jsonGetBoardList 호출 성공");
 		List<Map<String,Object>> boardList = null;
-		boardList = boardLogic.getBoardList(null);
+		Map<String,Object> target = new HashMap<>();
+		boardList = boardLogic.getBoardList(target);
 		Gson g = new Gson();
 		String imsi = g.toJson(boardList);
 		res.setContentType("application/json;charset=utf-8");
@@ -107,6 +114,27 @@ public class Board41Controller extends MultiActionController {
 			res.sendRedirect("등록실패 페이지 이동처리");
 		}
 	}
+	public void boardUpdate(HttpServletRequest req, HttpServletResponse res) 
+			throws Exception
+	{
+		logger.info("boardUpdate호출 성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String,Object> pmap = new HashMap<>();
+		//사용자가 입력한 값이나 서버에서 클라이언트에게 요청한 값 넘김.
+		hmb.multiBind(pmap);
+		int result = 0;
+		result = boardLogic.boardUpdate(pmap);
+		logger.info("boardUpdate컨트롤러 :" + result);//1
+		
+		if(result == 1) {
+			logger.info("boardUpdate 성공");
+			res.sendRedirect("./getBoardList.sp4");
+		}
+		else {
+			logger.info("boardUpdate 실패");
+			res.sendRedirect("수정실패 페이지 이동처리");
+		}
+	}
 	public void boardDelete(HttpServletRequest req, HttpServletResponse res) 
 	throws Exception
 	{
@@ -123,5 +151,22 @@ public class Board41Controller extends MultiActionController {
 		else {
 			res.sendRedirect("삭제실패");
 		}
+	}
+	public ModelAndView getBmNoo(HttpServletRequest req, HttpServletResponse res) 
+	throws Exception
+	{
+		logger.info("getBoardList 호출 성공");
+		HashMapBinder hmb = new HashMapBinder(req);
+		Map<String,Object> target = new HashMap<>();
+		//hmb.bind(target);
+		List<Map<String,Object>> boardList = null;
+		boardList = boardLogic.getBmNoo(target);//where bm_no=? and bm_title LIKE '%'||?||'%'
+		logger.info("boardList: "+boardList);//
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("boardList", boardList);
+		mav.setViewName("board/myInfo_page");
+		//RequestDispatcher view = req.getRequestDispatcher("getBoardList.jsp");
+		//view.forward(req, res);
+		return mav;
 	}
 }

@@ -1,0 +1,18 @@
+servlet.xml
+- controller관련된 내용
+- 응답 page
+- 첨부파일
+- 보안
+- 인증관련
+- 유저간 인터셉트
+
+
+simpleurlhandlermapping
+url과 method를 mapping 함
+
+키와 밸류
+ex) /board/boardInsert.sp4"><board-controller>
+
+
+스프링 부트에서는
+beanfactory와 applicationcontext 에서 bean들을 내부적으로 (보이진않지만) 관리해줌

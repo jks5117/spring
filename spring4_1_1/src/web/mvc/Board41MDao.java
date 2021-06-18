@@ -1,12 +1,11 @@
 package web.mvc;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
-
-import com.vo.BoardMVO;
 
 public class Board41MDao {
 	Logger logger = Logger.getLogger(Board41MDao.class);
@@ -37,9 +36,15 @@ public class Board41MDao {
 		return result;
 	}
 	public int boardMDelete(Map<String, Object> pmap) {
-		logger.info("boardMInsert 호출 성공");
+		logger.info("boardMDelete 호출 성공");
 		int result = 0;
 		sqlSessionTemplate.insert("boardMDel",pmap);
+		return result;
+	}
+	public int boardMUpdate(Map<String, Object> pmap) {
+		logger.info("boardMUpdate 호출 성공");
+		int result = 0;
+		sqlSessionTemplate.update("bmUpdate",pmap);
 		return result;
 	}
 	public void hitCount(int bm_no) {
@@ -49,7 +54,6 @@ public class Board41MDao {
 	public void bmStepUpdate(Map<String, Object> pmap) {
 		logger.info("bmStepUpdate 호출 성공");
 		sqlSessionTemplate.insert("bmStepUpdate",pmap);
-		
 	}
 	public int getBmGroup() {
 		logger.info("getBmGroup 호출 성공");
@@ -64,4 +68,11 @@ public class Board41MDao {
 		return result;
 	}
 	
+	//다오
+	public List<Map<String,Object>> getBmNoo(Map<String,Object> pmap) {
+		logger.info("getBmNo 호출 성공");
+		List<Map<String,Object>> result = null;
+		result = sqlSessionTemplate.selectList("test1");
+		return result;
+	}
 }
